@@ -15,6 +15,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import rkr.binatestation.shopping.R;
+import rkr.binatestation.shopping.fragments.ProductListFragment;
+import rkr.binatestation.shopping.models.CategoryModel;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -43,6 +45,9 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        addProductFragment();
+        addProductFragment();
     }
 
     @Override
@@ -92,5 +97,12 @@ public class HomeActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void addProductFragment() {
+        ProductListFragment productListFragment = ProductListFragment.newInstance(CategoryModel.getDummyCategory());
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.activity_home_content_frame, productListFragment, productListFragment.getTag())
+                .commit();
     }
 }
