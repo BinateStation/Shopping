@@ -51,6 +51,19 @@ public class PacketModel implements Parcelable {
         return packetModels;
     }
 
+    public static int getSelectedItemPosition(List<PacketModel> packetModels, PacketModel packetModel) {
+        if (packetModels != null && packetModel != null) {
+            int i = packetModels.indexOf(packetModel);
+            if (i == -1) {
+                return 0;
+            } else {
+                return i;
+            }
+        } else {
+            return 0;
+        }
+    }
+
     @Override
     public String toString() {
         return getPacketLabel();

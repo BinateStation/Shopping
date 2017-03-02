@@ -28,6 +28,7 @@ public class ProductModel implements Parcelable {
     private String productName;
     private String imageUrl;
     private int quantity = 1;
+    private PacketModel packetSelected;
     private CategoryModel categoryModel;
     private List<PacketModel> packetModelList = new ArrayList<>();
 
@@ -43,6 +44,7 @@ public class ProductModel implements Parcelable {
         productName = in.readString();
         imageUrl = in.readString();
         quantity = in.readInt();
+        packetSelected = in.readParcelable(PacketModel.class.getClassLoader());
         categoryModel = in.readParcelable(CategoryModel.class.getClassLoader());
         packetModelList.clear();
         PacketModel[] models = (PacketModel[]) in.readParcelableArray(PacketModel.class.getClassLoader());
@@ -97,6 +99,14 @@ public class ProductModel implements Parcelable {
         this.quantity = quantity;
     }
 
+    public PacketModel getPacketSelected() {
+        return packetSelected;
+    }
+
+    public void setPacketSelected(PacketModel packetSelected) {
+        this.packetSelected = packetSelected;
+    }
+
     public CategoryModel getCategoryModel() {
         return categoryModel;
     }
@@ -121,6 +131,7 @@ public class ProductModel implements Parcelable {
         out.writeLong(productId);
         out.writeString(productName);
         out.writeString(imageUrl);
+        out.writeParcelable(packetSelected, flags);
         out.writeParcelable(categoryModel, flags);
         PacketModel[] models = packetModelList.toArray(new PacketModel[0]);
         out.writeParcelableArray(models, flags);
