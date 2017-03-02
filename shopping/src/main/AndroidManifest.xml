@@ -3,6 +3,7 @@
     package="rkr.binatestation.shopping">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
@@ -35,7 +36,8 @@
         </activity>
         <activity
             android:name=".activities.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
