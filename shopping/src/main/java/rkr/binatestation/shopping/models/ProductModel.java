@@ -3,6 +3,10 @@ package rkr.binatestation.shopping.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Created by RKR on 02-03-2017.
  * ProductModel.
@@ -22,12 +26,10 @@ public class ProductModel implements Parcelable {
 
     private long productId;
     private String productName;
-    private String imageUrl = "http://relaxon30a.com/wp-content/uploads/2013/11/Bag_of_Groceries.jpg";
+    private String imageUrl;
+    private int quantity = 1;
     private CategoryModel categoryModel;
-
-    public static ProductModel getDummyProduct() {
-        return new ProductModel(0, "Product Name", "http://relaxon30a.com/wp-content/uploads/2013/11/Bag_of_Groceries.jpg", CategoryModel.getDummyCategory());
-    }
+    private List<PacketModel> packetModelList = new ArrayList<>();
 
     public ProductModel(long productId, String productName, String imageUrl, CategoryModel categoryModel) {
         this.productId = productId;
@@ -36,23 +38,26 @@ public class ProductModel implements Parcelable {
         this.categoryModel = categoryModel;
     }
 
-    public static ProductModel getDummyProduct() {
-        return new ProductModel(0, "Product Name", "http://relaxon30a.com/wp-content/uploads/2013/11/Bag_of_Groceries.jpg", CategoryModel.getDummyCategory());
-    }
-
-    public static ProductModel getDummyProduct() {
-        return new ProductModel(0, "Product Name", "http://relaxon30a.com/wp-content/uploads/2013/11/Bag_of_Groceries.jpg", CategoryModel.getDummyCategory());
-    }
-
-    public static ProductModel getDummyProduct() {
-        return new ProductModel(0, "Product Name", "http://relaxon30a.com/wp-content/uploads/2013/11/Bag_of_Groceries.jpg", CategoryModel.getDummyCategory());
-    }
-
     private ProductModel(Parcel in) {
         productId = in.readLong();
         productName = in.readString();
         imageUrl = in.readString();
+        quantity = in.readInt();
         categoryModel = in.readParcelable(CategoryModel.class.getClassLoader());
+        packetModelList.clear();
+        PacketModel[] models = (PacketModel[]) in.readParcelableArray(PacketModel.class.getClassLoader());
+        Collections.addAll(packetModelList, models);
+    }
+
+    public static ProductModel getDummyProduct() {
+        ProductModel productModel = new ProductModel(
+                0,
+                "Product Name",
+                "http://relaxon30a.com/wp-content/uploads/2013/11/Bag_of_Groceries.jpg",
+                CategoryModel.getDummyCategory()
+        );
+        productModel.setPacketModelList(PacketModel.getDummyPacketList());
+        return productModel;
     }
 
     @Override
@@ -84,12 +89,28 @@ public class ProductModel implements Parcelable {
         this.imageUrl = imageUrl;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public CategoryModel getCategoryModel() {
         return categoryModel;
     }
 
     public void setCategoryModel(CategoryModel categoryModel) {
         this.categoryModel = categoryModel;
+    }
+
+    public List<PacketModel> getPacketModelList() {
+        return packetModelList;
+    }
+
+    public void setPacketModelList(List<PacketModel> packetModelList) {
+        this.packetModelList = packetModelList;
     }
 
     public int describeContents() {
@@ -101,6 +122,8 @@ public class ProductModel implements Parcelable {
         out.writeString(productName);
         out.writeString(imageUrl);
         out.writeParcelable(categoryModel, flags);
+        PacketModel[] models = packetModelList.toArray(new PacketModel[0]);
+        out.writeParcelableArray(models, flags);
     }
 }
 

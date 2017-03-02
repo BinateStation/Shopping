@@ -4,7 +4,9 @@
     style="@style/AppTheme.ProductCard"
     app:cardCornerRadius="@dimen/cardview_default_radius"
     app:cardElevation="@dimen/cardview_default_elevation"
-    app:cardUseCompatPadding="true">
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true"
+    app:contentPadding="@dimen/cardview_default_radius">
 
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/a_product_image"

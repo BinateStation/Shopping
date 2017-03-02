@@ -35,7 +35,7 @@ public class CategoryModel implements Parcelable {
     }
 
     public static CategoryModel getDummyCategory() {
-        return new CategoryModel(0, "Test Category");
+        return new CategoryModel(0, "Category Name");
     }
 
     @Override
