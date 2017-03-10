@@ -1,6 +1,5 @@
 package rkr.binatestation.shopping.adapters;
 
-import android.support.v7.widget.AppCompatRatingBar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,13 +58,13 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         private NetworkImageView mProductImageView;
         private TextView mProductNameTextView;
-        private AppCompatRatingBar mProductRatingBar;
+        private TextView mProductPriceTextView;
 
         ViewHolder(View itemView) {
             super(itemView);
             mProductImageView = (NetworkImageView) itemView.findViewById(R.id.a_product_image);
             mProductNameTextView = (TextView) itemView.findViewById(R.id.a_product_name);
-            mProductRatingBar = (AppCompatRatingBar) itemView.findViewById(R.id.a_product_rating);
+            mProductPriceTextView = (TextView) itemView.findViewById(R.id.a_product_price);
         }
     }
 }
